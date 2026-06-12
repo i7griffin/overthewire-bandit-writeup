@@ -22,7 +22,7 @@ My walkthrough notes and learning journey through the OverTheWire Bandit wargame
 
 ## Levels Completed
 
-- Bandit 0–13
+- Bandit 0–15
 
 ## Key Learning Outcomes
 
