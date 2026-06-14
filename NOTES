@@ -1,0 +1,33 @@
+OPENSSL  
+
+This is the standard command used to initiate a secure TLS handshake with a web server:bash
+openssl s_client -connect <domain_or_IP>:<port> -servername <domain>
+Detailed Syntax Breakdown:
+openssl: Calls the OpenSSL command-line program.
+s_client: The specific sub-command/utility that acts as a generic SSL/TLS client.
+-connect: Specifies the target address and port.
+<domain_or_IP>:<port>: The destination. For secure web browsing (HTTPS), the port is always 443.if you want any other port to send data or something , should specify the port after the domain with a semicolon . 
+-servername: Sends the hostname during the TLS handshake (known as SNI). 
+This is critical because modern servers host multiple websites on a single IP address.<domain>: 
+The exact website name (e.g., google.com).
+
+
+Enforce a Specific TLS Protocol Version
+You can force the command to connect using only a specific version of TLS by appending a protocol flag:bash
+openssl s_client -connect google.com:443 -servername google.com -tls1_2
+openssl s_client -connect google.com:443 -servername google.com -tls1_3
+
+If, when connecting to a remote server in this way, the TLS handshake completes but you’re getting disconnected after the first HTTP request line, check that you’ve specified the -crlf switch on the command line. This switch ensures that the newlines you type are translated to a carriage return plus line feed combo to ensure string HTTP compliance.
+
+
+Using:
+
+openssl s_client -connect bandit.labs.overthewire.org:31790 -quiet
+
+suppresses those TLS messages, which is why the Bandit hint specifically points you toward the "CONNECTED COMMANDS" section of the man page.
+
+
+Nmap
+
+
+Nmap follows the general syntax nmap [Scan Type] [Options] {target}, where you specify the type of scan, any additional options, and the target host or network. Ports can be selected using the -p flag. To scan all 65,535 ports, use nmap -p- 192.168.1.1; to scan a range of ports, use nmap -p 1-100 192.168.1.1; and to scan specific ports, use nmap -p 22,80,443 192.168.1.1. Nmap can also scan both TCP and UDP ports simultaneously, for example sudo nmap -sS -sU -p T:21,22,80,U:53,161 192.168.1.1, where -sS performs a TCP SYN scan and -sU performs a UDP scan. For a quicker scan of only the 100 most common ports, use nmap -F 192.168.1.1. Targets may be specified as a single IP address (nmap -p- 192.168.1.50), a domain name (nmap -p- scanme.nmap.org), an IP range (nmap -p 1-100 192.168.1.1-50), or an entire subnet using CIDR notation (nmap -p 80,443 192.168.1.0/24). Common scan options include -sS for a fast TCP SYN scan, -sV for service and version detection, -O for operating system detection, -Pn to skip host discovery and treat the target as online, and -v for verbose output. A typical enumeration workflow involves first discovering open ports with nmap -p- <target> and then performing detailed service enumeration using nmap -sC -sV -p <open_ports> <target>, where -sC runs Nmap's default scripting engine checks and -sV identifies service versions running on the discovered ports.
