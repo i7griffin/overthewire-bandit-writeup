@@ -40,3 +40,14 @@ ssh -i /path/to/private_key username@remote_host
 /path/to/private_key: The exact filepath to your private key file (e.g., ~/.ssh/id_ed25519 or ~/Downloads/my-key.pem).
 username: Your user account name on the remote server (e.g., ubuntu or root).
 remote_host: The IP address or domain name of the destination server.
+
+
+EDIT 
+
+The Linux diff command compares two files or directories line by line to show the exact differences between them. 
+It is widely used by developers and system administrators to track changes, review code modifications, and generate patch files.
+Basic Syntax
+diff [options] file1 file2
+Use code with caution.
+If both files are identical, diff outputs absolutely nothing.
+If they differ, diff generates instructions showing how to change file1 to make it exactly match file2
