@@ -51,3 +51,11 @@ diff [options] file1 file2
 Use code with caution.
 If both files are identical, diff outputs absolutely nothing.
 If they differ, diff generates instructions showing how to change file1 to make it exactly match file2
+
+
+Netcat
+nc -help – This command will print a list of all of the available commands you can use in Netcat. It will come in handy if you run into any errors while writing a script or are unsure of how to proceed.
+
+nc -z -v site.com – This will run a basic port scan of the specified website or server. Netcat will return verbose results with lists of ports and statuses. Keep in mind that you can use an IP address in place of the site domain.
+
+nc -l – This command will instruct the local system to begin listening for TCP connections and UDP activity on a specific port number.
