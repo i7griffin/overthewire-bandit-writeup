@@ -6,3 +6,24 @@ SSH daemon (sshd) → waits for SSH connections on port 22.
 Web server (apache2, nginx) → waits for HTTP requests on ports 80/443.
 FTP server → waits for file transfer connections.
 Minecraft server → waits for Minecraft clients.
+
+
+When you scan with Nmap:
+
+nmap target
+
+You're basically asking:
+
+Which daemons are listening?
+
+Example:
+
+22/tcp  open  ssh
+80/tcp  open  http
+3306/tcp open mysql
+
+Meaning:
+
+Port 22  → SSH daemon
+Port 80  → Web daemon
+Port 3306 → MySQL daemon
