@@ -59,3 +59,21 @@ nc -help – This command will print a list of all of the available commands you
 nc -z -v site.com – This will run a basic port scan of the specified website or server. Netcat will return verbose results with lists of ports and statuses. Keep in mind that you can use an IP address in place of the site domain.
 
 nc -l – This command will instruct the local system to begin listening for TCP connections and UDP activity on a specific port number.
+
+
+The setuid bit This bit is present for files which have executable permissions. The setuid bit simply indicates that when running the executable, it will set its permissions to that of the user who created it (owner), instead of setting it to the user who launched it. Similarly, there is a
+setgid bit which does the same for the gid . To locate the setuid look for an 's' instead of an 'x' in the executable bit of the file permissions. An example of an executable with setuid permission is passwd , as can be seen in the following output.
+
+ls -l /etc/passwd
+This returns the following output:
+
+-rwsr-xr-x root root 2447 Aug 29  2018 /etc/passwd
+
+As we can observe, the 'x' is replaced by an 's' in the user section of the file permissions. To set the setuid bit, use the following command.
+
+chmod u+s 
+
+To remove the setuid bit, use the following command.
+
+chmod u-s 
+
