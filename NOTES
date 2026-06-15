@@ -148,3 +148,9 @@ Executables often contain readable strings embedded inside machine code.
 This string reveals the intended functionality of the program.
 The binary is designed to execute commands using another user's privileges.
 
+
+# SCREEN 
+The screen command is an advanced terminal multiplexer that allows you to have multiple sessions within one terminal window. It's like having "tabs" in your Linux terminal — you can open, detach, switch, or resume sessions at any time without losing what you're working on. It's particularly convenient for system administrators, developers, or anyone working remotely.
+
+From executing lengthy installations to multi-tasking across multiple terminal windows, the screen command is easy to use, lightweight, and already present in most Linux installations such as Ubuntu, CentOS, or Debian
+
