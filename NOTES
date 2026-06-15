@@ -77,3 +77,74 @@ To remove the setuid bit, use the following command.
 
 chmod u-s 
 
+USING SET UID EFFECTIVELY 
+
+Step 1: Identify the File Type
+
+Command:
+
+file bandit20-do
+
+Output:
+
+bandit20-do: setuid ELF 32-bit executable
+
+Analysis:
+
+ELF indicates a Linux executable file.
+32-bit indicates the architecture it was compiled for.
+setuid is the key finding. A setuid program runs with the permissions of the file owner rather than the user executing it.
+Step 2: Test the Program's Functionality
+
+Command:
+
+./bandit20-do whoami
+
+Analysis:
+
+The argument whoami is passed to the program.
+bandit20-do executes the command using the privileges of the program owner.
+This test helps determine which user privileges are being used.
+
+Purpose:
+
+To verify that the binary can execute commands as another user.
+
+Step 3: Execute a Command Through the Binary
+
+Command:
+
+./bandit20-do cat bandit20-do
+
+Analysis:
+
+bandit20-do executes the command:
+cat bandit20-do
+Since cat displays file contents, the binary file itself is printed to the terminal.
+Step 4: Understand the ELF Output
+
+Output begins with:
+
+ELF
+
+Analysis:
+
+Executable files are stored in binary format.
+cat displays raw bytes rather than human-readable text.
+The resulting output appears as random symbols and unreadable characters.
+
+This confirms that bandit20-do is a compiled executable rather than a text script.
+
+Step 5: Discover Embedded Strings
+
+Within the binary output, the following text appears:
+
+Run a command as another user.
+Example: %s whoami
+
+Analysis:
+
+Executables often contain readable strings embedded inside machine code.
+This string reveals the intended functionality of the program.
+The binary is designed to execute commands using another user's privileges.
+
