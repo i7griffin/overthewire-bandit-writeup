@@ -154,3 +154,10 @@ The screen command is an advanced terminal multiplexer that allows you to have m
 
 From executing lengthy installations to multi-tasking across multiple terminal windows, the screen command is easy to use, lightweight, and already present in most Linux installations such as Ubuntu, CentOS, or Debian
 
+Comparison
+Feature	             tmux	        screen
+Modern	             ✅	            ❌
+Split panes	         ✅         	Limited
+Easier management	   ✅           	❌
+Bandit levels	       ✅	            ✅
+Recommended today    ✅           	❌
