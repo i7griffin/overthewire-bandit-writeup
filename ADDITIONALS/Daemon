@@ -1,1 +1,8 @@
+A network daemon is simply a program that runs in the background and waits for network connections.
 
+Examples:
+
+SSH daemon (sshd) → waits for SSH connections on port 22.
+Web server (apache2, nginx) → waits for HTTP requests on ports 80/443.
+FTP server → waits for file transfer connections.
+Minecraft server → waits for Minecraft clients.
