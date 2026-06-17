@@ -1,1 +1,42 @@
+SSH Brute Force Credential Testing: Nmap, Metasploit, and Hydra
 
+1. Nmap (ssh-brute script)
+Nmap includes the ssh-brute NSE script for testing SSH credentials.
+nmap -p 22 --script ssh-brute --script-args userdb=users.txt,passdb=passwords.txt <target-ip>
+Key options:
+
+userdb — path to username wordlist
+passdb — path to password wordlist
+--script-args brute.mode=user — iterate passwords per user
+--script-args brute.firstonly=true — stop after first valid credential found
+
+
+2. Metasploit (auxiliary/scanner/ssh/ssh_login)
+use auxiliary/scanner/ssh/ssh_login
+set RHOSTS <target-ip>
+set USER_FILE /path/to/users.txt
+set PASS_FILE /path/to/passwords.txt
+set VERBOSE false
+set THREADS 10
+run
+Key options:
+
+RHOSTS — target IP or range
+STOP_ON_SUCCESS true — halt after a valid login is found
+THREADS — concurrent attempts (keep low to avoid lockouts)
+Successful logins open a session accessible via sessions -l
+
+
+3. Hydra
+hydra -L users.txt -P passwords.txt ssh://<target-ip>
+Common flags:
+
+-l / -L — single username or username list
+-p / -P — single password or password list
+-t — number of parallel tasks (default 16; lower for SSH)
+-s — specify a non-default port
+-o output.txt — save results to file
+-V — verbose, show each attempt
+
+Example with reduced threads and custom port:
+hydra -L users.txt -P passwords.txt -t 4 -s 2222 ssh://<target-ip>
