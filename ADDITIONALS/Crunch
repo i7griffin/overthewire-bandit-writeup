@@ -1,0 +1,94 @@
+# 1-digit numbers (0-9)
+crunch 34 34 -t "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %" >> passwords.txt
+
+# 2-digit numbers (10-99)
+crunch 35 35 -t "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %%" >> passwords.txt
+
+# 3-digit numbers (100-999)
+crunch 36 36 -t "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %%%" >> passwords.txt
+
+# 4-digit numbers (1000-9999)
+crunch 37 37 -t "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 %%%%" >> passwords.txt
+
+# Exactly 10000
+echo "gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8 10000" >> passwords.txt
+
+### Crunch - Wordlist Generation Tool
+
+**Crunch** is a Linux command-line utility used to generate custom wordlists based on user-defined character sets, lengths, and patterns. It is widely used in cybersecurity for password auditing, brute-force simulations, CTF challenges, and penetration testing exercises.
+
+#### Basic Syntax
+
+```bash
+crunch <min_length> <max_length> [character_set] [options]
+```
+
+#### Examples
+
+**1. Generate all combinations of lowercase letters with length 4:**
+
+```bash
+crunch 4 4 abcdefghijklmnopqrstuvwxyz
+```
+
+**2. Generate numeric passwords of length 4:**
+
+```bash
+crunch 4 4 0123456789
+```
+
+Output:
+
+```text
+0000
+0001
+0002
+...
+9999
+```
+
+**3. Save the generated wordlist to a file:**
+
+```bash
+crunch 4 4 0123456789 -o wordlist.txt
+```
+
+**4. Generate words using a pattern:**
+
+```bash
+crunch 8 8 -t pass%%%%
+```
+
+Output:
+
+```text
+pass0000
+pass0001
+pass0002
+...
+```
+
+#### Common Options
+
+| Option | Description                   |
+| ------ | ----------------------------- |
+| `-o`   | Save output to a file         |
+| `-t`   | Specify a pattern             |
+| `-f`   | Use predefined character sets |
+| `-s`   | Start from a specific string  |
+| `-e`   | End at a specific string      |
+
+#### Cybersecurity Use Cases
+
+* Generating PIN lists for brute-force attacks.
+* Creating password dictionaries for testing.
+* Solving CTF challenges such as OverTheWire Bandit.
+* Simulating password attacks in lab environments.
+
+**Example from OverTheWire Bandit:**
+
+```bash
+crunch 4 4 0123456789 -o pins.txt
+```
+
+This command generates all 4-digit PINs from `0000` to `9999`, which can then be combined with other commands like `cat`, `for`, `while`, or `nc` to automate authentication attempts.
