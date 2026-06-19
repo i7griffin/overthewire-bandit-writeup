@@ -1,0 +1,33 @@
+to be honest level 26 was a hard one i didnt get the idea clicked to approach the problem . I solved this level using claude 
+The Full Picture — Bandit 26
+1. What is the login shell for bandit26?
+The user bandit26 has a custom restricted shell set in /etc/passwd:
+bandit26:x:11026:11026::/home/bandit26:/usr/bin/showtext
+Instead of /bin/bash, the shell is /usr/bin/showtext.
+
+2. What does /usr/bin/showtext do?
+It is a tiny script that does this:
+sh#!/bin/sh
+more ~/text.txt
+exit 0
+It simply:
+
+Runs more on a text file (the bandit26 ASCII art you saw)
+Then immediately exits
+
+This is why every shell you tried got kicked out — the login shell was never bash, it was this script that always exited!
+
+3. Why did shrinking the terminal work?
+more is a pager — it displays content one page at a time. Its behaviour depends on terminal height:
+Terminal sizeWhat happensLarge/tallEntire file fits on screen → more finishes instantly → script exits → kicked outSmall/tinyFile does NOT fit → more pauses and waits → shows --More--
+By shrinking the terminal you forced more to pause and wait for your input instead of finishing and exiting!
+
+4. Why press v inside more?
+more has a hidden feature — pressing v while paused opens the current file in vi! So you essentially jumped from more into vi without the shell noticing.
+
+5. Why did :set shell=/bin/bash matter in vi?
+vi has its own shell escape feature. When you type :shell in vi it spawns a shell. But by default it would spawn /usr/bin/showtext again (the restricted shell)!
+So first you overrode it:
+:set shell=/bin/bash    ← tell vi to use bash instead
+:shell                  ← now spawn bash
+This bypassed the restriction completely and gave you a real bash shell!
