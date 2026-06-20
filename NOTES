@@ -161,3 +161,8 @@ Split panes	         ✅         	Limited
 Easier management	   ✅           	❌
 Bandit levels	       ✅	            ✅
 Recommended today    ✅           	❌
+
+The Rule for git clone Without a Destination
+When you run:
+shgit clone ssh://server/path/to/repo
+Git takes the last folder name in the URL (here, repo) and creates a folder with that same name in your current working directory — wherever you happen to be standing (pwd) at the moment you run the command.
